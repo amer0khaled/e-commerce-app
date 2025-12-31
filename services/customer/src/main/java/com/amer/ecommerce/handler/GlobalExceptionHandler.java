@@ -1,5 +1,6 @@
-package com.amer.ecommerce.exception;
+package com.amer.ecommerce.handler;
 
+import com.amer.ecommerce.exception.CustomerNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

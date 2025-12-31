@@ -1,4 +1,10 @@
 package com.amer.ecommerce.customer;
 
-public class CustomerResponse {
+public record CustomerResponse(
+        String id,
+        String firstName,
+        String lastName,
+        String email,
+        Address address
+) {
 }
