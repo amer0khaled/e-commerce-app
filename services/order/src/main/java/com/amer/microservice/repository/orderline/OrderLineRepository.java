@@ -1,4 +1,4 @@
-package com.amer.microservice.orderline;
+package com.amer.microservice.repository.orderline;
 
 import com.amer.microservice.domain.OrderLine;
 import org.springframework.data.jpa.repository.JpaRepository;

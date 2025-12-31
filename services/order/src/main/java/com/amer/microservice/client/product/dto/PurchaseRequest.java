@@ -1,4 +1,4 @@
-package com.amer.microservice.client;
+package com.amer.microservice.client.product.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;

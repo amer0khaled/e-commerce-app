@@ -1,4 +1,4 @@
-package com.amer.microservice.client;
+package com.amer.microservice.client.product.dto;
 
 import java.math.BigDecimal;
 

@@ -1,4 +1,4 @@
-package com.amer.microservice.api.dto.order;
+package com.amer.microservice.api.dto;
 
 import com.amer.microservice.client.product.dto.PurchaseRequest;
 import com.amer.microservice.domain.PaymentMethod;

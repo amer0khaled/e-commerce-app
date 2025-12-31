@@ -1,5 +1,8 @@
-package com.amer.microservice.order;
+package com.amer.microservice.api.controller;
 
+import com.amer.microservice.api.dto.OrderRequest;
+import com.amer.microservice.api.dto.OrderResponse;
+import com.amer.microservice.service.order.impl.OrderServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,25 +15,25 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderController {
 
-    private final OrderService orderService;
+    private final OrderServiceImpl orderServiceImpl;
 
     @PostMapping
     public ResponseEntity<Integer> createOrder(
             @RequestBody @Valid OrderRequest request
     ) {
-        return ResponseEntity.ok(orderService.createOrder(request));
+        return ResponseEntity.ok(orderServiceImpl.createOrder(request));
     }
 
     @GetMapping
     public ResponseEntity<List<OrderResponse>> findAll() {
-        return ResponseEntity.ok(orderService.findAll());
+        return ResponseEntity.ok(orderServiceImpl.findAll());
     }
 
     @GetMapping("/{order_id}")
     public ResponseEntity<OrderResponse> findById(
             @PathVariable Integer orderId
     ) {
-        return ResponseEntity.ok(orderService.findById(orderId));
+        return ResponseEntity.ok(orderServiceImpl.findById(orderId));
     }
 
 }

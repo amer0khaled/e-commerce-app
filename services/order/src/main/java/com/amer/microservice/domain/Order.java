@@ -1,6 +1,5 @@
-package com.amer.microservice.order;
+package com.amer.microservice.domain;
 
-import com.amer.microservice.orderline.OrderLine;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -12,14 +11,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter
-@Builder
 @Entity
-@EntityListeners(AuditingEntityListener.class)
 @Table(name = "customer_order")
+@EntityListeners(AuditingEntityListener.class)
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -34,13 +32,16 @@ public class Order {
     @Column(nullable = false)
     private String customerId;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private OrderStatus status;
+
     @OneToMany(
             mappedBy = "order",
             cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.LAZY
+            orphanRemoval = true
     )
-    private List<OrderLine> orderLines = new ArrayList<>();
+    private final List<OrderLine> orderLines = new ArrayList<>();
 
     @CreatedDate
     @Column(updatable = false, nullable = false)
@@ -49,10 +50,6 @@ public class Order {
     @LastModifiedDate
     @Column(nullable = false)
     private LocalDateTime lastModifiedDate;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private OrderStatus status;
 
     public static Order create(
             String customerId,
@@ -78,7 +75,6 @@ public class Order {
 
     public void removeOrderLine(OrderLine orderLine) {
         orderLines.remove(orderLine);
-        orderLine.setOrder(null);
     }
 
     public BigDecimal getTotalAmount() {
@@ -86,5 +82,5 @@ public class Order {
                 .map(OrderLine::getTotalPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
-
 }
+

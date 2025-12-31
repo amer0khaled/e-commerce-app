@@ -1,4 +1,4 @@
-package com.amer.microservice.order;
+package com.amer.microservice.repository.order;
 
 import com.amer.microservice.domain.Order;
 import org.springframework.data.jpa.repository.JpaRepository;

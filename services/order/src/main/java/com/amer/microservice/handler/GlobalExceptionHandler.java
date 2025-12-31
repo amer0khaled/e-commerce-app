@@ -1,7 +1,7 @@
-package com.amer.ecommerce.handler;
+package com.amer.microservice.handler;
 
-import com.amer.ecommerce.exception.InsufficientStockException;
-import com.amer.ecommerce.exception.ProductNotFoundException;
+import com.amer.microservice.exception.BussinessException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,17 +13,17 @@ import java.util.HashMap;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<String> handleProductNotFoundException(ProductNotFoundException ex) {
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<String> handleEntityNotFoundException(EntityNotFoundException ex) {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .body(ex.getMessage());
     }
 
-    @ExceptionHandler(InsufficientStockException.class)
-    public ResponseEntity<String> handleInsufficientStockException(InsufficientStockException ex) {
+    @ExceptionHandler(BussinessException.class)
+    public ResponseEntity<String> handleBussinessException(BussinessException ex) {
         return ResponseEntity
-                .status(HttpStatus.CONFLICT)
+                .status(HttpStatus.BAD_REQUEST)
                 .body(ex.getMessage());
     }
 

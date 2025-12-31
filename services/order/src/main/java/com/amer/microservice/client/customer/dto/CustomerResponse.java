@@ -1,4 +1,4 @@
-package com.amer.microservice.client.customer;
+package com.amer.microservice.client.customer.dto;
 
 public record CustomerResponse(
         String id,

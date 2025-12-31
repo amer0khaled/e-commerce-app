@@ -1,18 +1,14 @@
-package com.amer.microservice.orderline;
+package com.amer.microservice.domain;
 
-import com.amer.microservice.order.Order;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.math.BigDecimal;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Builder
 @Entity
 @Table(name = "order_line")
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderLine {
 
     @Id
@@ -27,22 +23,34 @@ public class OrderLine {
     private Integer productId;
 
     @Column(nullable = false)
-    @Positive
     private Integer quantity;
 
     @Column(precision = 19, scale = 2, nullable = false)
-    @Positive
     private BigDecimal unitPrice;
+
+    static OrderLine create(
+            Order order,
+            Integer productId,
+            Integer quantity,
+            BigDecimal unitPrice
+    ) {
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Quantity must be positive");
+        }
+        if (unitPrice.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("Unit price must be positive");
+        }
+
+        OrderLine line = new OrderLine();
+        line.order = order;
+        line.productId = productId;
+        line.quantity = quantity;
+        line.unitPrice = unitPrice;
+        return line;
+    }
 
     @Transient
     public BigDecimal getTotalPrice() {
         return unitPrice.multiply(BigDecimal.valueOf(quantity));
     }
-
-    protected void setOrder(Order order) {
-        this.order = order;
-    }
-
-
-
 }

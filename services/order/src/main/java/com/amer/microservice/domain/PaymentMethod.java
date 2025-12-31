@@ -1,4 +1,4 @@
-package com.amer.microservice.order;
+package com.amer.microservice.domain;
 
 public enum PaymentMethod {
     PAYPAL,
