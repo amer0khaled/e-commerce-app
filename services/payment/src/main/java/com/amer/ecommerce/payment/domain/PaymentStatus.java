@@ -1,4 +1,4 @@
-package com.amer.ecommerce.payment;
+package com.amer.ecommerce.payment.domain;
 
 public enum PaymentStatus {
     PENDING,

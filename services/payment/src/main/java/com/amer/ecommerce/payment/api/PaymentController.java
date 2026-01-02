@@ -1,5 +1,7 @@
-package com.amer.ecommerce.payment;
+package com.amer.ecommerce.payment.api;
 
+import com.amer.ecommerce.payment.api.dto.PaymentRequest;
+import com.amer.ecommerce.payment.api.dto.PaymentResponse;
 import com.amer.ecommerce.payment.service.impl.PaymentServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +19,7 @@ public class PaymentController {
     private final PaymentServiceImpl paymentServiceImpl;
 
     @PostMapping
-    public ResponseEntity<Integer> createPayment(
+    public ResponseEntity<PaymentResponse> createPayment(
             @RequestBody @Valid PaymentRequest request
     ) {
         return ResponseEntity.ok(paymentServiceImpl.createPayment(request));

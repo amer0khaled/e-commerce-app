@@ -1,4 +1,4 @@
-package com.amer.ecommerce.payment;
+package com.amer.ecommerce.payment.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,7 +27,14 @@ public class Payment {
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus status;
+
     private Integer orderId;
+
+    @Column(name = "transaction_id", unique = true)
+    private String transactionId;
+
 
     @CreatedDate
     @Column(updatable = false, nullable = false)
@@ -36,7 +43,5 @@ public class Payment {
     @LastModifiedDate
     @Column(nullable = false)
     private LocalDateTime lastModifiedDate;
-
-
 
 }
