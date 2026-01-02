@@ -37,7 +37,7 @@ The system is secured using **Keycloak**, communicates asynchronously using **Ap
 | **Order Service**             | Create & manage orders                | PostgreSQL |
 | **Payment Service**           | Handle payments                       | PostgreSQL |
 | **Notification Service**      | Send notifications                    | MongoDB    |
-| **Config Server**             | Centralized configuration             | Git        |
+| **Config Server**             | Centralized configuration             | —        |
 | **Discovery Server (Eureka)** | Service registration & discovery      | —          |
 
 ---
