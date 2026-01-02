@@ -1,4 +1,12 @@
 package com.amer.ecommerce.notification.messaging.order;
 
-public record Product() {
+import java.math.BigDecimal;
+
+public record Product(
+        Integer productId,
+        String productName,
+        String productDescription,
+        BigDecimal unitPrice,
+        Integer purchasedQuantity
+) {
 }

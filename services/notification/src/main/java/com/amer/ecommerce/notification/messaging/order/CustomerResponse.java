@@ -1,6 +1,6 @@
 package com.amer.ecommerce.notification.messaging.order;
 
-public record Customer(
+public record CustomerResponse(
         Integer id,
         String firstName,
         String lastName,

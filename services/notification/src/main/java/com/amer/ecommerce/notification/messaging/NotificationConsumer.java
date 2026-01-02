@@ -1,17 +1,16 @@
-package com.amer.ecommerce.notification.service;
+package com.amer.ecommerce.notification.messaging;
 
 import com.amer.ecommerce.notification.domain.Notification;
 import com.amer.ecommerce.notification.domain.NotificationStatus;
 import com.amer.ecommerce.notification.domain.NotificationType;
-import com.amer.ecommerce.notification.messaging.email.EmailService;
 import com.amer.ecommerce.notification.messaging.order.OrderConfirmation;
 import com.amer.ecommerce.notification.messaging.payment.PaymentConfirmation;
 import com.amer.ecommerce.notification.repository.NotificationRepository;
-import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -22,8 +21,12 @@ public class NotificationConsumer {
 
     private final NotificationRepository notificationRepository;
 
-    
-    @KafkaListener(topics = "payment-topic")
+
+    @Transactional
+    @KafkaListener(
+            topics = "payment-topic",
+            groupId = "notification-payment-group"
+    )
     public void consumePaymentConfirmation(PaymentConfirmation message) {
         log.info("Consumed payment confirmation: {}", message);
         if (notificationRepository.existsByExternalReference(message.transactionId())) {
@@ -41,19 +44,13 @@ public class NotificationConsumer {
 
         notificationRepository.save(notification);
 
-        // send email to customer
-        var customerName = paymentConfirmation.customerFirstName() + " "
-                + paymentConfirmation.customerLastName();
-        emailService.sendPaymentSuccessEmail(
-                paymentConfirmation.customerEmail(),
-                customerName,
-                paymentConfirmation.amount(),
-                paymentConfirmation.orderReference()
-        );
-
     }
 
-    @KafkaListener(topics = "order-topic")
+    @Transactional
+    @KafkaListener(
+            topics = "order-topic",
+            groupId = "notification-order-group"
+    )
     public void consumeOrderConfirmation(OrderConfirmation message) {
         log.info("Consumed order confirmation: {}", message);
 
