@@ -1,7 +1,15 @@
-package com.amer.ecommerce.product;
+package com.amer.ecommerce.product.service.impl;
 
-import com.amer.ecommerce.exception.InsufficientStockException;
-import com.amer.ecommerce.exception.ProductNotFoundException;
+import com.amer.ecommerce.product.exception.InsufficientStockException;
+import com.amer.ecommerce.product.exception.ProductNotFoundException;
+import com.amer.ecommerce.product.api.dto.ProductPurchaseRequest;
+import com.amer.ecommerce.product.api.dto.ProductPurchaseResponse;
+import com.amer.ecommerce.product.api.dto.ProductRequest;
+import com.amer.ecommerce.product.api.dto.ProductResponse;
+import com.amer.ecommerce.product.domain.Product;
+import com.amer.ecommerce.product.mapper.ProductMapper;
+import com.amer.ecommerce.product.repository.ProductRepository;
+import com.amer.ecommerce.product.service.ProductService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,17 +23,19 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class ProductService {
+public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
 
-    public Integer createProduct(ProductRequest request) {
+    @Override
+    public ProductResponse createProduct(ProductRequest request) {
         var product = productRepository.save(productMapper.toProduct(request));
-        return product.getId();
+        return productMapper.fromProduct(product);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
+    @Override
     public List<ProductPurchaseResponse> purchaseProduct(List<ProductPurchaseRequest> request) {
         // 1. check if the product is available
         var requestedProductIds = request.stream()
@@ -66,12 +76,14 @@ public class ProductService {
         return purchasedProducts;
     }
 
+    @Override
     public ProductResponse findById(Integer productId) {
         return productRepository.findById(productId)
                 .map(productMapper::fromProduct)
                 .orElseThrow(() -> new EntityNotFoundException("Product Not Found With ID:: " + productId));
     }
 
+    @Override
     public List<ProductResponse> findAll() {
         return productRepository.findAll()
                 .stream()

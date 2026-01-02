@@ -1,7 +1,7 @@
-package com.amer.ecommerce.handler;
+package com.amer.ecommerce.product.handler;
 
-import com.amer.ecommerce.exception.InsufficientStockException;
-import com.amer.ecommerce.exception.ProductNotFoundException;
+import com.amer.ecommerce.product.exception.InsufficientStockException;
+import com.amer.ecommerce.product.exception.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

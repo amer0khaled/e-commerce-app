@@ -1,6 +1,10 @@
-package com.amer.ecommerce.product;
+package com.amer.ecommerce.product.mapper;
 
-import com.amer.ecommerce.category.Category;
+import com.amer.ecommerce.product.category.Category;
+import com.amer.ecommerce.product.api.dto.ProductPurchaseResponse;
+import com.amer.ecommerce.product.api.dto.ProductRequest;
+import com.amer.ecommerce.product.api.dto.ProductResponse;
+import com.amer.ecommerce.product.domain.Product;
 import org.springframework.stereotype.Component;
 
 @Component

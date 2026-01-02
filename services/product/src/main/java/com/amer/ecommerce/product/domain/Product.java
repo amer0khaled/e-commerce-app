@@ -1,6 +1,6 @@
-package com.amer.ecommerce.product;
+package com.amer.ecommerce.product.domain;
 
-import com.amer.ecommerce.category.Category;
+import com.amer.ecommerce.product.category.Category;
 import jakarta.persistence.*;
 import lombok.*;
 

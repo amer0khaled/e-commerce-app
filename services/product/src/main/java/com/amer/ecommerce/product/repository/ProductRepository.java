@@ -1,5 +1,6 @@
-package com.amer.ecommerce.product;
+package com.amer.ecommerce.product.repository;
 
+import com.amer.ecommerce.product.domain.Product;
 import jakarta.persistence.LockModeType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;

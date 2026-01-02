@@ -1,4 +1,4 @@
-package com.amer.ecommerce.product;
+package com.amer.ecommerce.product.api.dto;
 
 import java.math.BigDecimal;
 
