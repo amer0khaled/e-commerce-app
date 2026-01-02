@@ -1,5 +1,8 @@
-package com.amer.ecommerce.customer;
+package com.amer.ecommerce.customer.api;
 
+import com.amer.ecommerce.customer.api.dto.CustomerRequest;
+import com.amer.ecommerce.customer.api.dto.CustomerResponse;
+import com.amer.ecommerce.customer.service.CustomerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -1,0 +1,114 @@
+{
+  "info": {
+    "name": "E-Commerce Microservices (Gateway)",
+    "_postman_id": "a1c3d9d4-ecms-2025",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Enterprise E-Commerce Microservices tested via Spring Cloud Gateway"
+  },
+  "item": [
+    {
+      "name": "Customer Service",
+      "item": [
+        {
+          "name": "Create Customer",
+          "request": {
+            "auth": { "type": "oauth2" },
+            "method": "POST",
+            "url": "{{gateway_url}}/api/v1/customers",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Emma\",\n  \"lastName\": \"Johnson\",\n  \"email\": \"emma.johnson@example.com\",\n  \"address\": {\n    \"street\": \"Main St\",\n    \"houseNumber\": \"45\",\n    \"zipCode\": \"10001\"\n  }\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Get All Customers",
+          "request": {
+            "auth": { "type": "oauth2" },
+            "method": "GET",
+            "url": "{{gateway_url}}/api/v1/customers"
+          }
+        },
+        {
+          "name": "Get Customer By Id",
+          "request": {
+            "auth": { "type": "oauth2" },
+            "method": "GET",
+            "url": "{{gateway_url}}/api/v1/customers/{{customerId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Product Service",
+      "item": [
+        {
+          "name": "Create Product",
+          "request": {
+            "auth": { "type": "oauth2" },
+            "method": "POST",
+            "url": "{{gateway_url}}/api/v1/products",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Bluetooth Speaker\",\n  \"description\": \"Wireless speaker\",\n  \"availableQuantity\": 100,\n  \"price\": 49.99,\n  \"categoryId\": 1\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Get Products",
+          "request": {
+            "auth": { "type": "oauth2" },
+            "method": "GET",
+            "url": "{{gateway_url}}/api/v1/products"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Order Service",
+      "item": [
+        {
+          "name": "Create Order",
+          "request": {
+            "auth": { "type": "oauth2" },
+            "method": "POST",
+            "url": "{{gateway_url}}/api/v1/orders",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reference\": \"ORD-2025-01\",\n  \"amount\": 900,\n  \"paymentMethod\": \"PAYPAL\",\n  \"customerId\": \"{{customerId}}\",\n  \"products\": [\n    { \"productId\": 1, \"quantity\": 2 }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Get Orders",
+          "request": {
+            "auth": { "type": "oauth2" },
+            "method": "GET",
+            "url": "{{gateway_url}}/api/v1/orders"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payment Service",
+      "item": [
+        {
+          "name": "Create Payment",
+          "request": {
+            "auth": { "type": "oauth2" },
+            "method": "POST",
+            "url": "{{gateway_url}}/api/v1/payments",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 900,\n  \"paymentMethod\": \"PAYPAL\",\n  \"orderId\": 1,\n  \"orderReference\": \"ORD-2025-01\",\n  \"customer\": {\n    \"id\": \"{{customerId}}\",\n    \"firstName\": \"Emma\",\n    \"lastName\": \"Johnson\",\n    \"email\": \"emma.johnson@example.com\"\n  }\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
