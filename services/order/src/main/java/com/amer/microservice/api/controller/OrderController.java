@@ -2,7 +2,7 @@ package com.amer.microservice.api.controller;
 
 import com.amer.microservice.api.dto.OrderRequest;
 import com.amer.microservice.api.dto.OrderResponse;
-import com.amer.microservice.service.order.impl.OrderServiceImpl;
+import com.amer.microservice.service.impl.OrderServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ public class OrderController {
     private final OrderServiceImpl orderServiceImpl;
 
     @PostMapping
-    public ResponseEntity<Integer> createOrder(
+    public ResponseEntity<OrderResponse> createOrder(
             @RequestBody @Valid OrderRequest request
     ) {
         return ResponseEntity.ok(orderServiceImpl.createOrder(request));

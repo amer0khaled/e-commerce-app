@@ -1,9 +1,7 @@
 package com.amer.microservice.domain;
 
 public enum PaymentMethod {
+    CARD,
     PAYPAL,
-    CREDIT_CARD,
-    VISA,
-    MASTER_CARD,
-    BITCOIN
+    CRYPTO
 }

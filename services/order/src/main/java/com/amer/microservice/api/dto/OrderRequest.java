@@ -6,9 +6,14 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public record OrderRequest(
+        @NotBlank(message = "Reference Number cannot be blank")
+        String referenceNumber,
+        @NotNull(message = "Amount is required")
+        BigDecimal amount,
         @NotBlank(message = "Customer Id cannot be blank")
         String customerId,
         @NotNull(message = "Payment Method is required")

@@ -1,15 +1,17 @@
-package com.amer.microservice.service.order.impl;
+package com.amer.microservice.service.impl;
 
 import com.amer.microservice.api.dto.OrderRequest;
 import com.amer.microservice.api.dto.OrderResponse;
 import com.amer.microservice.api.mapper.OrderMapper;
 import com.amer.microservice.client.customer.CustomerClient;
+import com.amer.microservice.client.payment.PaymentClient;
+import com.amer.microservice.client.payment.dto.PaymentRequest;
 import com.amer.microservice.client.product.ProductClient;
 import com.amer.microservice.exception.BussinessException;
 import com.amer.microservice.messaging.kafka.OrderConfirmation;
 import com.amer.microservice.messaging.kafka.OrderProducer;
 import com.amer.microservice.repository.order.OrderRepository;
-import com.amer.microservice.service.order.OrderService;
+import com.amer.microservice.service.OrderService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -26,9 +28,10 @@ public class OrderServiceImpl implements OrderService {
     private final CustomerClient customerClient;
     private final ProductClient productClient;
     private final OrderProducer orderProducer;
+    private final PaymentClient paymentClient;
 
     @Transactional
-    public Integer createOrder(OrderRequest request) {
+    public OrderResponse createOrder(OrderRequest request) {
         // Validate customer (openFeign)
         var customer = customerClient.findCustomerById(request.customerId())
                 .orElseThrow(() -> new BussinessException(
@@ -50,9 +53,16 @@ public class OrderServiceImpl implements OrderService {
                 )
         );
         // persist the aggregate (Order + OrderLines inside the Order)
-        var persistedOrderId = orderRepository.save(order).getId();
+        var persistedOrder = orderRepository.save(order);
 
         // toDo start payment process
+        paymentClient.requestOrderPayment(
+                PaymentRequest.makePaymentRequest(
+                        request,
+                        persistedOrder.getId(),
+                        customer
+                )
+        );
 
         // send the order confirmation notification to a kafka topic
         orderProducer.sendOrderConfirmation(
@@ -63,7 +73,7 @@ public class OrderServiceImpl implements OrderService {
                 )
         );
 
-        return persistedOrderId;
+        return orderMapper.fromOrder(persistedOrder);
     }
 
     public List<OrderResponse> findAll() {
