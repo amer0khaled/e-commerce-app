@@ -11,7 +11,7 @@ The system is secured using **Keycloak**, communicates asynchronously using **Ap
 
 ## Architecture Overview
 
-![Architecture Diagram](docs/architecture.png)
+![Architecture Diagram](diagrams/arch.png)
 
 ### High-Level Flow
 
