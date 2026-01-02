@@ -1,7 +1,6 @@
-package com.amer.ecommerce.payment.strategy.impl;
+package com.amer.ecommerce.payment.strategy;
 
 import com.amer.ecommerce.payment.domain.PaymentMethod;
-import com.amer.ecommerce.payment.strategy.PaymentStrategy;
 import org.springframework.stereotype.Component;
 
 import java.util.EnumMap;
