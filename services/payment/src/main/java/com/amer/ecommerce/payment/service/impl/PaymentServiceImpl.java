@@ -12,6 +12,7 @@ public class PaymentService {
     private final PaymentMapper paymentMapper;
 
     public Integer createPayment(PaymentRequest request) {
+        var payment = paymentRepository.save(paymentMapper.toPayment(request));
 
     }
 }

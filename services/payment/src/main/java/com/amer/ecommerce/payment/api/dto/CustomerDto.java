@@ -1,4 +1,4 @@
-package com.amer.ecommerce.payment;
+package com.amer.ecommerce.payment.domain;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

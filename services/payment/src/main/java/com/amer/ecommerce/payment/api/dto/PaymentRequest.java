@@ -1,5 +1,7 @@
 package com.amer.ecommerce.payment;
 
+import com.amer.ecommerce.payment.domain.PaymentMethod;
+
 import java.math.BigDecimal;
 
 public record PaymentRequest(
