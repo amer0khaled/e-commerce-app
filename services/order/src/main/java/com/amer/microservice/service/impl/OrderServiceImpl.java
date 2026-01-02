@@ -31,6 +31,7 @@ public class OrderServiceImpl implements OrderService {
     private final PaymentClient paymentClient;
 
     @Transactional
+    @Override
     public OrderResponse createOrder(OrderRequest request) {
         // Validate customer (openFeign)
         var customer = customerClient.findCustomerById(request.customerId())
@@ -55,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
         // persist the aggregate (Order + OrderLines inside the Order)
         var persistedOrder = orderRepository.save(order);
 
-        // toDo start payment process
+        // start the payment process
         paymentClient.requestOrderPayment(
                 PaymentRequest.makePaymentRequest(
                         request,
@@ -76,6 +77,7 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.fromOrder(persistedOrder);
     }
 
+    @Override
     public List<OrderResponse> findAll() {
         return orderRepository.findAll()
                 .stream()
@@ -83,6 +85,7 @@ public class OrderServiceImpl implements OrderService {
                 .toList();
     }
 
+    @Override
     public OrderResponse findById(Integer orderId) {
         return orderRepository.findById(orderId)
                 .map(orderMapper::fromOrder)
