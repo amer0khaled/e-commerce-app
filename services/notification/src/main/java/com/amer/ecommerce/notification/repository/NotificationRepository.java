@@ -1,6 +1,14 @@
-package com.amer.ecommerce.notification.repository.payment;
+package com.amer.ecommerce.notification.repository;
 
-import com.amer.ecommerce.notification.messaging.payment.PaymentConfirmation;
+import com.amer.ecommerce.notification.domain.Notification;
+import com.amer.ecommerce.notification.domain.NotificationStatus;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface NotificationRepository extends JpaRepository<PaymentConfirmation, Integer>{
-}
+import java.util.List;
+
+public interface NotificationRepository extends MongoRepository<Notification, String> {
+
+    boolean existsByExternalReference(String s);
+
+    List<Notification> findByStatus(NotificationStatus status);}
+
