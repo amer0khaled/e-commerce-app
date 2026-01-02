@@ -1,6 +1,6 @@
-package com.amer.microservice.handler;
+package com.amer.ecommerce.payment.handler;
 
-import com.amer.microservice.exception.BussinessException;
+import com.amer.ecommerce.payment.exception.BusinessException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +20,8 @@ public class GlobalExceptionHandler {
                 .body(ex.getMessage());
     }
 
-    @ExceptionHandler(BussinessException.class)
-    public ResponseEntity<String> handleBussinessException(BussinessException ex) {
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<String> handleBusinessException(BusinessException ex) {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(ex.getMessage());
