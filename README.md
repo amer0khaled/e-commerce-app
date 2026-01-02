@@ -134,7 +134,7 @@ Services include:
 
 ---
 
-## 🚀 How to Run
+## How to Run
 
 ```bash
 # Start infrastructure and services
