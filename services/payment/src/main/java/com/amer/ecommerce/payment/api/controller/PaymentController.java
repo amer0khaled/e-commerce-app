@@ -1,4 +1,4 @@
-package com.amer.ecommerce.payment.api;
+package com.amer.ecommerce.payment.api.controller;
 
 import com.amer.ecommerce.payment.api.dto.PaymentRequest;
 import com.amer.ecommerce.payment.api.dto.PaymentResponse;
