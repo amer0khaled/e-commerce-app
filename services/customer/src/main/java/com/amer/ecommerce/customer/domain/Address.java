@@ -1,4 +1,4 @@
-package com.amer.ecommerce.customer;
+package com.amer.ecommerce.customer.domain;
 
 import lombok.*;
 import org.springframework.validation.annotation.Validated;

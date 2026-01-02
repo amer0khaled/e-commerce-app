@@ -1,5 +1,6 @@
-package com.amer.ecommerce.customer;
+package com.amer.ecommerce.customer.repository;
 
+import com.amer.ecommerce.customer.domain.Customer;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface CustomerRepository extends MongoRepository<Customer, String> {

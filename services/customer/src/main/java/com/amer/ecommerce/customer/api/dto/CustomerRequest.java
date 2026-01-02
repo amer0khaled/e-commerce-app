@@ -1,5 +1,6 @@
-package com.amer.ecommerce.customer;
+package com.amer.ecommerce.customer.api.dto;
 
+import com.amer.ecommerce.customer.domain.Address;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 

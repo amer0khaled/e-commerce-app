@@ -1,4 +1,4 @@
-package com.amer.ecommerce.exception;
+package com.amer.ecommerce.customer.exception;
 
 public class CustomerNotFoundException extends RuntimeException {
 

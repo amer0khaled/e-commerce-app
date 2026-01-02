@@ -1,5 +1,8 @@
-package com.amer.ecommerce.customer;
+package com.amer.ecommerce.customer.mapper;
 
+import com.amer.ecommerce.customer.api.dto.CustomerRequest;
+import com.amer.ecommerce.customer.api.dto.CustomerResponse;
+import com.amer.ecommerce.customer.domain.Customer;
 import org.springframework.stereotype.Component;
 
 @Component

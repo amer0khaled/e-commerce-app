@@ -1,4 +1,4 @@
-package com.amer.ecommerce.customer.api;
+package com.amer.ecommerce.customer.api.controller;
 
 import com.amer.ecommerce.customer.api.dto.CustomerRequest;
 import com.amer.ecommerce.customer.api.dto.CustomerResponse;
@@ -18,19 +18,19 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @PostMapping
-    public ResponseEntity<String> createCustomer(
+    public ResponseEntity<CustomerResponse> createCustomer(
             @RequestBody @Valid CustomerRequest request
     ) {
         return ResponseEntity.ok(this.customerService.createCustomer(request));
     }
 
     @PutMapping
-    public ResponseEntity<Void> updateCustomer(
+    public ResponseEntity<CustomerResponse> updateCustomer(
             @PathVariable String customerId,
             @RequestBody @Valid CustomerRequest request
     ) {
-        customerService.updateCustomer(customerId, request);
-        return ResponseEntity.accepted().build();
+
+        return ResponseEntity.ok(customerService.updateCustomer(customerId, request));
     }
 
     @GetMapping

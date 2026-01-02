@@ -1,4 +1,4 @@
-package com.amer.ecommerce.handler;
+package com.amer.ecommerce.customer.handler;
 
 import java.util.Map;
 
