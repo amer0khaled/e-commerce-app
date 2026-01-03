@@ -2,7 +2,7 @@ package com.amer.ecommerce.payment.api.controller;
 
 import com.amer.ecommerce.payment.api.dto.PaymentRequest;
 import com.amer.ecommerce.payment.api.dto.PaymentResponse;
-import com.amer.ecommerce.payment.service.impl.PaymentServiceImpl;
+import com.amer.ecommerce.payment.service.PaymentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class PaymentController {
 
-    private final PaymentServiceImpl paymentServiceImpl;
+    private final PaymentService paymentService;
 
     @PostMapping
     public ResponseEntity<PaymentResponse> createPayment(
             @RequestBody @Valid PaymentRequest request
     ) {
-        return ResponseEntity.ok(paymentServiceImpl.createPayment(request));
+        return ResponseEntity.ok(paymentService.createPayment(request));
     }
 
 }
