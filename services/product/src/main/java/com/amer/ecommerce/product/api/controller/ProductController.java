@@ -4,7 +4,7 @@ import com.amer.ecommerce.product.api.dto.ProductPurchaseRequest;
 import com.amer.ecommerce.product.api.dto.ProductPurchaseResponse;
 import com.amer.ecommerce.product.api.dto.ProductRequest;
 import com.amer.ecommerce.product.api.dto.ProductResponse;
-import com.amer.ecommerce.product.service.impl.ProductServiceImpl;
+import com.amer.ecommerce.product.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,32 +17,32 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductController {
 
-    private final ProductServiceImpl productServiceImpl;
+    private final ProductService productService;
 
     @PostMapping
     public ResponseEntity<ProductResponse> createProduct(
             @RequestBody @Valid ProductRequest request
     ) {
-        return ResponseEntity.ok(productServiceImpl.createProduct(request));
+        return ResponseEntity.ok(productService.createProduct(request));
     }
 
     @PostMapping("/purchase")
     public ResponseEntity<List<ProductPurchaseResponse>> purchaseProduct(
             @RequestBody List<ProductPurchaseRequest> request
     ) {
-        return ResponseEntity.ok(productServiceImpl.purchaseProduct(request));
+        return ResponseEntity.ok(productService.purchaseProduct(request));
     }
 
     @GetMapping("/{productId}")
     public ResponseEntity<ProductResponse> findById(
             @PathVariable Integer productId
     ) {
-        return ResponseEntity.ok(productServiceImpl.findById(productId));
+        return ResponseEntity.ok(productService.findById(productId));
     }
 
     @GetMapping
     public ResponseEntity<List<ProductResponse>> findAll() {
-        return ResponseEntity.ok(productServiceImpl.findAll());
+        return ResponseEntity.ok(productService.findAll());
     }
 
 }
